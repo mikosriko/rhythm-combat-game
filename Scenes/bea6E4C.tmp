@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnd8uy63u5xya"]
+
+[ext_resource type="Script" path="res://Scripts/beat_tracker.gd" id="1_kf0pk"]
+[ext_resource type="PackedScene" uid="uid://b14env6pix5xt" path="res://Scenes/beat.tscn" id="1_qheh1"]
+
+[sub_resource type="Gradient" id="Gradient_ytlhs"]
+offsets = PackedFloat32Array(0, 0.181818, 1)
+colors = PackedColorArray(0.745098, 0.745098, 0.745098, 0, 0.745098, 0.745098, 0.745098, 0, 0.746094, 0.746094, 0.746094, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kkm0q"]
+gradient = SubResource("Gradient_ytlhs")
+width = 1920
+height = 10
+fill_to = Vector2(0.5, 0)
+repeat = 2
+
+[node name="Beat_Tracker" type="Control"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_kf0pk")
+num_of_beats = 2
+start_point = Vector2(-800, -135)
+end_point = Vector2(0, -135)
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -144.0
+offset_right = 960.0
+offset_bottom = -134.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1, 1.92)
+
+[node name="TextureRect" type="TextureRect" parent="AspectRatioContainer"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_kkm0q")
+
+[node name="Beat" parent="AspectRatioContainer" instance=ExtResource("1_qheh1")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="time_between_start_end" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="time_between_beats" type="Timer" parent="."]
+wait_time = 0.5

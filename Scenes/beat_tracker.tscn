@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnd8uy63u5xya"]
+
+[ext_resource type="Script" path="res://Scripts/beat_tracker.gd" id="1_kf0pk"]
+[ext_resource type="AudioStream" uid="uid://cpjcsd5ruv1bt" path="res://Sounds/Coconut Mall - Mario Kart Wii OST.mp3" id="2_c88um"]
+
+[sub_resource type="Gradient" id="Gradient_ytlhs"]
+offsets = PackedFloat32Array(0, 0.181818, 1)
+colors = PackedColorArray(0.745098, 0.745098, 0.745098, 0, 0.745098, 0.745098, 0.745098, 0, 0.746094, 0.746094, 0.746094, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kkm0q"]
+gradient = SubResource("Gradient_ytlhs")
+width = 1920
+height = 10
+fill_to = Vector2(0.5, 0)
+repeat = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_6apjt"]
+font_size = 24
+
+[node name="Beat_Tracker" type="Control"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_kf0pk")
+start_point = Vector2(0, 5)
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -192.0
+offset_right = 960.0
+offset_bottom = -182.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1, 1.92)
+stretch_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="AspectRatioContainer"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_kkm0q")
+
+[node name="ColorRect" type="ColorRect" parent="AspectRatioContainer"]
+layout_mode = 2
+color = Color(0.0678406, 0.715729, 0.914063, 1)
+
+[node name="time_between_beats" type="Timer" parent="."]
+
+[node name="TimingResult" type="Label" parent="."]
+layout_mode = 0
+offset_top = -171.0
+offset_right = 1920.0
+offset_bottom = -51.0
+text = "TimingText"
+label_settings = SubResource("LabelSettings_6apjt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimingScore" type="Label" parent="."]
+layout_mode = 0
+offset_top = -100.0
+offset_right = 1920.0
+offset_bottom = -51.0
+text = "TimingScore"
+label_settings = SubResource("LabelSettings_6apjt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Conductor" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_c88um")
+volume_db = -10.0
+autoplay = true
+
+[connection signal="timeout" from="time_between_beats" to="." method="_on_time_between_beats_timeout"]

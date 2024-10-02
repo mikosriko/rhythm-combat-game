@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4n1lokg156mo"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_l06bk"]
+
+[sub_resource type="Gradient" id="Gradient_lk1nh"]
+colors = PackedColorArray(0.165166, 0.361898, 0.243338, 1, 0.56829, 0.906579, 0.691006, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ds5j5"]
+gradient = SubResource("Gradient_lk1nh")
+width = 16
+height = 16
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8o0c7"]
+radius = 8.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_l06bk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
+scale = Vector2(1, 2)
+texture = SubResource("GradientTexture2D_ds5j5")
+offset = Vector2(0, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_8o0c7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -15)
+zoom = Vector2(3, 3)
